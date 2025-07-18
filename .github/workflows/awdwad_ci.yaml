@@ -36,6 +36,7 @@ jobs:
             --tag $REGISTRY/$IMAGE_NAME:$TAG_NAME \
             -f Dockerfile \
             .
+        
 
 
   deploy-image:
