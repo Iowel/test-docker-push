@@ -34,7 +34,8 @@ jobs:
           docker buildx create --use
           docker buildx build --no-cache --push \
             --tag $REGISTRY/$IMAGE_NAME:$TAG_NAME \
-            -f app/Dockerfile app/
+            -f Dockerfile \
+            .
 
   deploy-image:
     runs-on: ubuntu-latest
