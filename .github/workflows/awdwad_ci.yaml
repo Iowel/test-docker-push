@@ -10,6 +10,8 @@ env:
   REGISTRY: docker.io/foxyfoxys
   IMAGE_NAME: test-server
   CONTAINER_NAME: test-server-container
+  REGISTRY_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+  REGISTRY_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
 
 jobs:
   build-and-push:
@@ -47,11 +49,11 @@ jobs:
           host: ${{ secrets.SERVER_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           key: ${{ secrets.SSHKEY }}
-          envs: IMAGE_NAME,REGISTRY,GITHUB_SHA,CONTAINER_NAME
           port: 22
+          envs: REGISTRY,IMAGE_NAME,CONTAINER_NAME,REGISTRY_USERNAME,REGISTRY_PASSWORD,GITHUB_SHA
           script: |
             TAG_NAME=$(echo $GITHUB_SHA | head -c7)
-            docker login -u ${{ secrets.REGISTRY_USERNAME }} -p ${{ secrets.REGISTRY_PASSWORD }} $REGISTRY
-            docker stop $CONTAINER_NAME
-            docker rm $CONTAINER_NAME
+            echo $REGISTRY_PASSWORD | docker login $REGISTRY -u $REGISTRY_USERNAME --password-stdin
+            docker stop $CONTAINER_NAME || true
+            docker rm $CONTAINER_NAME || true
             docker run -d -p 8085:8080 --name $CONTAINER_NAME -t $REGISTRY/$IMAGE_NAME:$TAG_NAME
