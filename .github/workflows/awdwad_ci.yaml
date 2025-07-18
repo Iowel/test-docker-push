@@ -37,6 +37,7 @@ jobs:
             -f Dockerfile \
             .
 
+
   deploy-image:
     runs-on: ubuntu-latest
     needs: build-and-push
