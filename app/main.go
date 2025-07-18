@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/go-chi/chi/v5"
 )
 
 func main() {
@@ -14,4 +16,6 @@ func main() {
 
 	log.Println("server started")
 	http.ListenAndServe(":8080", r)
+	chiR := chi.NewRouter
+	_ = chiR
 }
