@@ -11,7 +11,7 @@ RUN go mod download
 COPY app ./app
 
 # Сборка бинарника из каталога app
-RUN cd app && go build -o ../server .
+RUN go build -o server ./app
 
 # Финальный минимальный образ
 FROM debian:bookworm-slim
