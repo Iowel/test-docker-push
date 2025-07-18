@@ -11,7 +11,7 @@ import (
 func main() {
 	r := http.NewServeMux()
 	r.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		fmt.Fprintf(w, "helloooooooooooo")
+		fmt.Fprintf(w, "hellooooooooOOOOOOOOOOOOOOOOOOOOOOOOOOOOoooo")
 	})
 
 	log.Println("server started")
