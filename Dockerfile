@@ -16,7 +16,7 @@ RUN go build -o server ./app
 # Финальный минимальный образ
 FROM debian:bookworm-slim
 
-COPY --from=builder /server /server
+COPY --from=builder /app/server /server
 
 EXPOSE 8080
 
